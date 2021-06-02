@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MenuItem from '@material-ui/core/MenuItem';
 import { FormGroup, FormControl, InputLabel, Input, Select, Box, AppBar, Toolbar, Typography } from '@material-ui/core';
 
 import AddIcon from '@material-ui/icons/Add';

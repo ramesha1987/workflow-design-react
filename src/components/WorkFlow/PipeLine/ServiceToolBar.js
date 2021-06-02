@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Handle } from 'react-flow-renderer';
 import Container from 'react-bootstrap/Container';
 import { Row, Col } from 'react-bootstrap';
 import { Box, AppBar, Typography, Toolbar } from '@material-ui/core';

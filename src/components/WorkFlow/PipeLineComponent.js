@@ -11,7 +11,6 @@ import { Colors } from '../../themes/constants/Colors';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CreateFlow from './PipeLine/CreateFlow';
 
-import CollectorEdit from './PipeLine/CollectorEdit';
 import { ServiceStore } from '../../themes/constants/ServiceStore';
 import CuratorEdit from './PipeLine/CuratorEdit';
 import DashboardIcon from '../../assets/dashboard.png'
