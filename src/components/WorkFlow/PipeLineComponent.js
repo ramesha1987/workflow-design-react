@@ -16,7 +16,6 @@ import CreateFlow from './PipeLine/CreateFlow';
 import CollectorEdit from './PipeLine/CollectorEdit';
 import { ServiceStore } from '../../themes/constants/ServiceStore';
 import CuratorEdit from './PipeLine/CuratorEdit';
-import queryString from 'query-string';
 import DashboardIcon from '../../assets/dashboard.png'
 import WorkflowIcon from '../../assets/workflow.png'
 import LogoutIcon from '../../assets/logout.png'
@@ -29,6 +28,7 @@ var joltSpectDefault = [{
   "operation": "default",
   "spec": {}
 }];
+
 
 var inputSchema = {
   name: 'Order',
@@ -210,7 +210,7 @@ class PipeLineComponent extends Component {
     this.state = {
       elements : props.elements,
       highlighted : "Collector",
-      params : queryString.parse(props.location.search)
+      template : props.template
     };
 
     this.changeServiceArea = this.changeServiceArea.bind(this)
@@ -287,7 +287,7 @@ class PipeLineComponent extends Component {
               <Col md={{ span: 12, offset: 0 }} >
                 <Box mr={7}>
                 <Row> 
-                   <CreateFlow changeServiceArea={this.state.changeServiceArea} template={this.state.params.id} elements={this.state.elements}/>                  
+                   <CreateFlow changeServiceArea={this.state.changeServiceArea} template={this.state.template} elements={this.state.elements}/>                  
                 </Row>
                 </Box>
               </Col>

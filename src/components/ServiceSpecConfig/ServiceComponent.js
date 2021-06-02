@@ -342,7 +342,7 @@ class ServiceComponent extends Component {
            
             <Row border={2}>
               <Col md={{ span: 1, offset: 0 }}>
-                <a href="http://localhost:3000/pipeline?id=1">
+                <a href="http://localhost:3000/pipelineTemplate">
                 <Button
                   style={{
                     borderRadius: 2,

@@ -214,7 +214,8 @@ class App extends Component {
            <Switch>
              <Route path="/service" render={(props ) => <ServiceComponent {...props}/>} />
              <Route path="/pipeline" render={(props ) => <PipeLineComponent {...props} elements={this.state.pipelineElements} updatePipeline={this.updatePipeline}></PipeLineComponent>}></Route>
-             
+             <Route path="/pipelineTemplate" render={(props ) => <PipeLineComponent {...props} elements={this.state.pipelineElements} template={1} updatePipeline={this.updatePipeline}></PipeLineComponent>}></Route>
+
 
            </Switch>
          </Router>
