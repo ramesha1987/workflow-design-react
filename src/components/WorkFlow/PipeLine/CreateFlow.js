@@ -23,7 +23,6 @@ import CuratorEdit from './CuratorEdit';
 import TransformerEdit from './TransformerEdit';
 import PublisherEdit from './PublisherEdit';
 
-import ServiceEditWrap from './ServiceEditWrap';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' 
 import { ServiceStore } from '../../../themes/constants/ServiceStore';

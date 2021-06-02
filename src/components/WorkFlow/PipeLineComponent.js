@@ -5,12 +5,10 @@ import Container from 'react-bootstrap/Container';
 import { Row, Col } from 'react-bootstrap';
 
 
-import Button from '@material-ui/core/Button';
 import { Box, AppBar, Typography } from '@material-ui/core';
 import AppHeader from '../AppHeader';
 import { Colors } from '../../themes/constants/Colors';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import HorizontalFlow from './PipeLine/HorizontalFlow';
 import CreateFlow from './PipeLine/CreateFlow';
 
 import CollectorEdit from './PipeLine/CollectorEdit';
