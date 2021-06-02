@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="188" height="44" viewBox="0 0 188 44">
+  <g id="Group_40" data-name="Group 40" transform="translate(-16 -11)">
+    <g id="logo" transform="translate(16 11)">
+      <g id="Group_4" data-name="Group 4">
+        <path id="Path_2" data-name="Path 2" d="M7,11.189l18.618,8.828,7.43-3.147V0Z" transform="translate(-6.301)" fill="#f58220"/>
+        <path id="Path_26" data-name="Path 26" d="M33.05,11.188,14.43,20.017,7,16.87V0Z" transform="translate(21.252)" fill="#f58220"/>
+        <path id="Path_3" data-name="Path 3" d="M27.441,23.44,6.2,13.3V32.53Z" transform="translate(-6.2 -1.048)" fill="#f58220"/>
+        <path id="Path_25" data-name="Path 25" d="M6.2,23.44,27.442,13.3V32.53Z" transform="translate(27.558 -1.048)" fill="#f58220"/>
+        <path id="Path_4" data-name="Path 4" d="M9.9,57.427V38.2H0V57.427Z" transform="translate(22.556 -14.428)" fill="#1657ab"/>
+        <path id="Path_5" data-name="Path 5" d="M6.2,34.978,27.441,45.03V25.8Z" transform="translate(-6.2 -2.03)" fill="#1657ab"/>
+        <path id="Path_24" data-name="Path 24" d="M27.442,34.978,6.2,45.03V25.8Z" transform="translate(27.558 -2.03)" fill="#1657ab"/>
+      </g>
+    </g>
+    <text id="Integration" transform="translate(83 36)" fill="#f58220" font-size="19" font-family="Poppins-Regular, Poppins"><tspan x="0" y="0">INTEGRATION</tspan></text>
+    <text id="System" transform="translate(83 51)" fill="#1657ab" font-size="10" font-family="Poppins-Medium, Poppins" font-weight="500" letter-spacing="1.632em"><tspan x="0" y="0">SYSTEM</tspan></text>
+  </g>
+</svg>
