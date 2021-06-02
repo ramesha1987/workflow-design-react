@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, InputLabel, Input, Select, Box, AppBar, Toolbar, Typography } from '@material-ui/core';
 
-import AddIcon from '@material-ui/icons/Add';
 import { Row, Col } from 'react-bootstrap';
 import { Colors } from '../../../themes/constants/Colors';
 import { ServiceStore } from '../../../themes/constants/ServiceStore';
