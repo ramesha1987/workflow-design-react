@@ -120,7 +120,7 @@ const elements = [
                  }}>
                
                
-                      <a href="http://localhost:3000/pipelineTemplate"
+                      <a href="/pipelineTemplate"
                       style={{
                         fontSize:"11px",
                         color: '#000'

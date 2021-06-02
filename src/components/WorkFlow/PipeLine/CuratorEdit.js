@@ -72,7 +72,7 @@ class CuratorEdit extends Component {
                             style={{ width: '240px'}}
                         />
                     </div>
-                    <a href="http://localhost:3000/service">Edit spec</a>
+                    <a href="/service">Edit spec</a>
                    
          
                 
