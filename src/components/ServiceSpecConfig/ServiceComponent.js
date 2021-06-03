@@ -115,14 +115,47 @@ function Contains(arrA, field) {
   return false;
 }
 
+
 function ContainsButModified(arrA, field) {
   for (var i = 0; i < arrA.length; i++) {
-    if (arrA[i].name === field.name && (arrA[i].spec !== field.spec || arrA[i].type !== field.type)) {
+    if (arrA[i].name === field.name && (arrA[i].spec !== field.spec && (field.spec && field.spec.includes("(@")))) {
       return true;
     }
   }
   return false;
 }
+
+function ContainsButNameModified(arrA, field) {
+  for (var i = 0; i < arrA.length; i++) {
+    if (arrA[i].name !== field.name && arrA[i].name === field.spec) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+function newButDirectField(arrA, field) {
+  for (var i = 0; i < arrA.length; i++) {
+    if (arrA[i].name !== field.name && (arrA[i].name === field.spec)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function newButComplexTransform(arrA, field) {
+  for (var i = 0; i < arrA.length; i++) {
+    if (arrA[i].name !== field.name && (arrA[i].name !== field.spec) && (field.spec && field.spec.includes(arrA[i].name))) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+
+
 
 class ServiceComponent extends Component {
   constructor(props) {
@@ -166,6 +199,9 @@ class ServiceComponent extends Component {
     if (data.name && data.function && data.srcField && data.type) {
       var fieldSpec = data.function + '(@(1,' + data.srcField + '))'
       var field = { name: data.name, type: data.type, spec: fieldSpec }
+
+      if(data.function === 'same')
+        field = { name: data.name, type: data.type, spec: data.srcField }
       var { inputSchema, outputSchema, joltSpec } = this.state
       outputSchema.fields.push(field)
       joltSpec = this.generateSpec(inputSchema, outputSchema)
@@ -226,52 +262,106 @@ class ServiceComponent extends Component {
     }
     else {
       console.log("input !=! output")
+     
       joltSpec = []
       var jolt = {}
       //This is the case where user added more custom fields and removed one or more fields from input
       //modify-default-beta will add all input fields with added new fields..
       //Removed input fields should be added in a spec array with "remove" spec
-      jolt["operation"] = "modify-default-beta"
-      jolt["spec"] = {}
-      outputSchema.fields.forEach(element => {
-        if (element.spec) {
-          jolt["spec"][element.name] = element.spec
-        }
-        else {
-          jolt["spec"][element.name] = element.name
-        }
-      });
-      joltSpec.push(jolt)
-
-      var joltRemove = {}
-      joltRemove["operation"] = "remove"
-      joltRemove["spec"] = {}
-      inputSchema.fields.forEach(element => {
-        if (!Contains(outputSchema.fields, element)) {
-          joltRemove["spec"][element.name] = ""
-        }
-      });
-      joltSpec.push(joltRemove)
-      //there will be one more scenario where added new fields are named same as removed input fields.
-      //After adding them in removal spec, we need to add one more "modify-default-beta" spec for those same but modified fields.
-      //Not possible by jolt, we can ask them to write another transformer
-      var joltModified = {}
-      joltModified["operation"] = "modify-default-beta"
-      joltModified["spec"] = {}
       var isAnyItemAdded = false;
+      var joltSameMembers = {}
+      joltSameMembers["operation"] = "shift"
+      joltSameMembers["spec"] = {}
+      var sames = [];
+      var nameModifieds = [];
+      var contentModifieds = [];
+      var newDirects = [];
+      var removeds = [];
+      var newButComplexs = [];
       outputSchema.fields.forEach(element => {
-        if (ContainsButModified(inputSchema.fields, element)) {
+        if (Contains(inputSchema.fields, element)) {
+          sames.push(element);
+        }
+        else if (ContainsButNameModified(inputSchema.fields, element)) {
+          nameModifieds.push(element);
+        }
+        else if (ContainsButModified(inputSchema.fields, element)) {
+          contentModifieds.push(element);
+        }
+        else if(newButDirectField(inputSchema.fields, element)){
+          newDirects.push(element)
+        }
+        else if(newButComplexTransform(inputSchema.fields, element))
+        {
+          newButComplexs.push(element);
+        }
+      });
+      inputSchema.fields.forEach(element => {
+        if (!(Contains(outputSchema.fields, element) || (ContainsButNameModified(outputSchema.fields, element))
+        )) {
+         removeds.push(element);
+        }
+      });
+
+      if(newButComplexs.length>0 || contentModifieds.length>0)
+      {
+        var joltModified = {}
+        joltModified["operation"] = "modify-default-beta"
+        joltModified["spec"] = {}
+        isAnyItemAdded = false;
+
+        joltModified["spec"] = {...joltSameMembers['spec']}
+        newButComplexs.forEach(element => {
+            if (element.spec) {
+              joltModified["spec"][element.name] = element.spec
+            }
+        });
+        contentModifieds.forEach(element => {
           if (element.spec) {
             joltModified["spec"][element.name] = element.spec
-            isAnyItemAdded = true
           }
-        }
-      });
-      if(isAnyItemAdded)
-      {
-        joltSpec.push(joltModified)
+        });
+        sames.forEach(element => {
+            joltModified["spec"][element.name] = element.spec
+        });       
+        joltSpec.push(joltModified)     
       }
-    }
+      else{
+        var joltModified = {}
+        joltModified["operation"] = "shift"
+        joltModified["spec"] = {}
+        isAnyItemAdded = false;
+        nameModifieds.forEach(element => {
+            if (element.spec) {
+              joltModified["spec"][element.spec] = element.name
+            }
+        });
+        newDirects.forEach(element => {
+          if (element.spec) {
+            joltModified["spec"][element.spec] = element.name
+          }
+        });
+        sames.forEach(element => {
+            joltModified["spec"][element.name] = element.name
+        });       
+        joltSpec.push(joltModified) 
+      } 
+      if(removeds.length>0)
+      {
+        var joltModified = {}
+        joltModified["operation"] = "remove"
+        joltModified["spec"] = {}
+        isAnyItemAdded = false;
+        removeds.forEach(element => {
+            joltModified["spec"][element.name] = ''
+            isAnyItemAdded = true;
+        });   
+        if(isAnyItemAdded)
+          joltSpec.push(joltModified) 
+      }
+
+      }
+     
     return joltSpec;
   }
 
@@ -358,6 +448,22 @@ class ServiceComponent extends Component {
                   CLOSE
                 </Button>
                 </a>
+              </Col>
+              <Col md={{ span: 1, offset: 0 }}>
+                <Button
+                  style={{
+                    borderRadius: 2,
+                    backgroundColor: Colors.logoBrown,
+                    padding: "4px 15px 4px 15px",
+                    fontSize: "13px",
+                    marginLeft: '5px',
+                    marginTop: '5px'
+
+                  }}
+                  variant="contained"
+                >
+                  VALIDATE
+                </Button>
               </Col>
       
             </Row>

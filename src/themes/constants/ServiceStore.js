@@ -87,24 +87,24 @@ export const ServiceStore = {
           }}],
           "spec": [
             {
-               "operation": "modify-default-beta",
-               "spec": {
-                  "name": "name",
-                  "itemPrices": "itemPrices",
-                  "addressLine1": "addressLine1",
-                  "addressLine2": "addressLine2",
-                  "payment": "payment",
-                  "ave": "=avg(@(1,itemPrices))",
-                  "nameUpperCase": "=toUpper(@(1,name))"
-               }
-            },
+              "operation": "modify-default-beta",
+              "spec": {
+                "average": "=avg(@(1,itemPrices))",
+                "sortedPrices": "=sort(@(1,itemPrices))",
+                "nameUpperCase": "=toUpper(@(1,name))"
+              }
+             },
             {
-               "operation": "remove",
-               "spec": {
-                  "id": ""
-               }
-            }
-         ]
+              "operation": "remove",
+              "spec": {
+                "id": "",
+                "name": "",
+                "itemPrices": "",
+                "payment": ""
+              }
+             }
+          ]
+          
     },
     Mapper: {        
         "inputs":[{

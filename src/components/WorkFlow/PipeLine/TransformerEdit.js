@@ -73,10 +73,46 @@ class TransformerEdit extends Component {
                             rows="15"
                             value={value}
                             readOnly
-                            style={{ width: '240px'}}
+                            style={{ width: '240px', height:"410px"}}
                         />
                     </div>
-                    <a href="/service">Edit spec</a>
+                    {
+                        (this.state.label === "Transformer") && <a href="/service">
+                        <Button
+                      style={{
+                        borderRadius: 2,
+                        backgroundColor: Colors.logoBrown,
+                        padding: "4px 15px 4px 15px",
+                        fontSize: "13px",
+                        marginLeft: '5px',
+                        marginTop: '5px'
+    
+                      }}
+                      variant="contained"
+                    >
+                      EDIT SPEC
+                    </Button>
+                        </a>
+                    }
+                    {
+                        (this.state.label === "Mapper") && <a>
+                        <Button
+                      style={{
+                        borderRadius: 2,
+                        backgroundColor: Colors.logoBrown,
+                        padding: "4px 15px 4px 15px",
+                        fontSize: "13px",
+                        marginLeft: '5px',
+                        marginTop: '5px'
+    
+                      }}
+                      variant="contained"
+                    >
+                      EDIT SPEC
+                    </Button>
+                        </a>
+                    }
+                    
                    
          
                 

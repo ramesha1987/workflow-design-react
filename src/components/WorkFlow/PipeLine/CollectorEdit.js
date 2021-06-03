@@ -9,6 +9,7 @@ import { ServiceStore } from '../../../themes/constants/ServiceStore';
 import Button from '@material-ui/core/Button';
 
 
+var order = { id: '2323232', name: 'Order by Customer', itemPrices: [10, 20, 50, 2, 100], addressLine1: 'Door 1, street 90, Town xx', addressLine2: 'City y, Country z', payment: 'SUCCUSS' };
 
 
 class CollectorEdit extends Component {
@@ -52,11 +53,13 @@ class CollectorEdit extends Component {
                 "spec": {}
               }]
               , undefined, 3);
+            let output = JSON.stringify(order
+              , undefined, 3);
 
         return (
             <React.Fragment>
                 <FormGroup>                    
-                    <Typography variant="h6">Collector</Typography>
+                    <Typography className="h7">Collector</Typography>
  
                     <FormControl>
                         <InputLabel id="selectFieldType">ConnectionType</InputLabel>
@@ -90,6 +93,17 @@ class CollectorEdit extends Component {
                     </FormControl>
                    
                 </FormGroup>
+                <Typography className="h7">Output</Typography>
+                <div className="form-group">
+                        <textarea
+                            className="form-control json-text-view"
+                            id="exampleFormControlTextarea1"
+                            rows="15"
+                            value={output}
+                            readOnly
+                            style={{ width: '240px', height: '200px'}}
+                        />
+                    </div>
 
             </React.Fragment>
                )

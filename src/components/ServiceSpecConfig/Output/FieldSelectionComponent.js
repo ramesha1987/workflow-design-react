@@ -62,8 +62,9 @@ class FieldSelectionComponent extends Component {
                         </Select>
                     </FormControl>
                     <FormControl>
-                        <InputLabel id="selectFunction">Select Transform funtion</InputLabel>
+                        <InputLabel id="selectFunction">Select Transform function</InputLabel>
                         <Select labelId="selectFunction" id="selectFunction" name="function" onChange={this.handleChange}>
+                            <MenuItem value="same">same</MenuItem>
                             <MenuItem value="=size">size</MenuItem>
                             <MenuItem value="=firstElement">firstElement</MenuItem>
                             <MenuItem value="=lastElement">lastElement</MenuItem>

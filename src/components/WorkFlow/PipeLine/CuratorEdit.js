@@ -11,6 +11,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
 
 
+var order = { id: '2323232', name: 'Order by Customer', itemPrices: [10, 20, 50, 2, 100], addressLine1: 'Door 1, street 90, Town xx', addressLine2: 'City y, Country z', payment: 'SUCCUSS' };
 
 class CuratorEdit extends Component {
     constructor(props) {
@@ -55,23 +56,51 @@ class CuratorEdit extends Component {
             let value = JSON.stringify(this.state.spec
               , undefined, 3);
 
+              let output = JSON.stringify(order
+                , undefined, 3);
+
         return (
             <React.Fragment>
                 <FormGroup>                    
                     <Typography className="h7">{this.state.label}</Typography>                  
-                    <Typography className="h6">Spec</Typography>
+                    <Typography className="h6">Input</Typography>
                     <div className="form-group">
                         <textarea
                             className="form-control json-text-view"
                             id="exampleFormControlTextarea1"
-                            rows="15"
-                            value={value}
+                            rows="7"
+                            value={output}
                             readOnly
-                            style={{ width: '240px'}}
+                            style={{ width: '240px', height: "190px"}}
                         />
                     </div>
-                    <a href="/service">Edit spec</a>
-                   
+                    <Typography className="h6">Output</Typography>
+                    <div className="form-group">
+                        <textarea
+                            className="form-control json-text-view"
+                            id="exampleFormControlTextarea1"
+                            rows="7"
+                            value={output}
+                            readOnly
+                            style={{ width: '240px', height: "177px"}}
+                        />
+                    </div>
+                    <a>
+                    <Button
+                  style={{
+                    borderRadius: 2,
+                    backgroundColor: Colors.logoBrown,
+                    padding: "4px 15px 4px 15px",
+                    fontSize: "13px",
+                    marginLeft: '5px',
+                    marginTop: '5px'
+
+                  }}
+                  variant="contained"
+                >
+                  EDIT SPEC
+                </Button>
+                </a>
          
                 
                 </FormGroup>

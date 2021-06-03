@@ -9,7 +9,13 @@ import { ServiceStore } from '../../../themes/constants/ServiceStore';
 import Button from '@material-ui/core/Button';
 
 
-
+var order = {
+    "addressLine1" : "Door 1, street 90, Town xx",
+    "addressLine2" : "City y, Country z",
+    "average" : 36.4,
+    "sortedPrices" : [ 2, 10, 20, 50, 100 ],
+    "nameUpperCase" : "ORDER BY CUSTOMER"
+  };
 
 class PublisherEdit extends Component {
     constructor(props) {
@@ -52,12 +58,13 @@ class PublisherEdit extends Component {
                 "spec": {}
               }]
               , undefined, 3);
-
+              let output = JSON.stringify(order
+                , undefined, 3);
+  
         return (
             <React.Fragment>
                 <FormGroup>                    
-                    <Typography variant="h6">Publisher</Typography>
- 
+                    <Typography className="h7">Publisher</Typography>
                     <FormControl>
                         <InputLabel id="selectFieldType">ConnectionType</InputLabel>
                         <Select labelId="selectFieldType" value= "REST" id="selectFieldType" name="type" onChange={this.handleChange}>
@@ -90,6 +97,17 @@ class PublisherEdit extends Component {
                     </FormControl>
                    
                 </FormGroup>
+                <Typography className="h7">Output</Typography>
+                <div className="form-group">
+                        <textarea
+                            className="form-control json-text-view"
+                            id="exampleFormControlTextarea1"
+                            rows="15"
+                            value={output}
+                            readOnly
+                            style={{ width: '240px', height: '200px'}}
+                        />
+                    </div>
 
             </React.Fragment>
                )
